@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Message } from 'primeng/api';
 import { Libro } from '../interfaces/libro.interface';
 import { LibrosService } from '../servicios/libros.service';
+import { FormularioLibroComponent } from './formulario-libro/formulario-libro.component';
 
 @Component({
   selector: 'app-libros',
@@ -9,6 +10,8 @@ import { LibrosService } from '../servicios/libros.service';
   styleUrls: ['./libros.component.css']
 })
 export class LibrosComponent implements OnInit {
+
+  @ViewChild('formulario') formLibro!: FormularioLibroComponent;
 
   //Aqui se guarda la lista de libros
   listaLibros: Libro[] = []; 
@@ -18,6 +21,7 @@ export class LibrosComponent implements OnInit {
   dialogoVisible: boolean = false; 
 
   mensajes: Message[] = [];
+  tituloDialogo: string = 'Registrar libro';
 
   constructor(
     private servicioLibros: LibrosService
@@ -42,7 +46,20 @@ export class LibrosComponent implements OnInit {
     });
   }
 
-  mostrarDialogo(){
+  nuevo(){
+    this.tituloDialogo = 'Registrar libro';
+    this.formLibro.limpiarFormulario();
+    this.formLibro.modo = 'Registrar';
     this.dialogoVisible = true;
+  }
+
+  editar(libro: Libro){
+    this.formLibro.codigo = libro.id;
+    this.formLibro.titulo = libro.titulo;
+    this.formLibro.autor = libro.autor;
+    this.formLibro.paginas = libro.paginas;
+    this.formLibro.modo = 'Editar';
+    this.dialogoVisible = true;
+    this.tituloDialogo = "Editar libro";
   }
 }
