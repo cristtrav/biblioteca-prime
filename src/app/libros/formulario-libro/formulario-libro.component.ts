@@ -10,6 +10,7 @@ import { LibrosService } from 'src/app/servicios/libros.service';
 })
 export class FormularioLibroComponent implements OnInit {
 
+  idactual: number = 0;
   codigo: number | null = null;
   titulo: string | null = null;
   autor: string | null = null;
@@ -69,7 +70,7 @@ export class FormularioLibroComponent implements OnInit {
 
   private editar(libro: Libro) {
     this.guardando = true;
-    this.servicioLibros.put(libro).subscribe({
+    this.servicioLibros.put(libro, this.idactual).subscribe({
       next: () => {
         this.guardando = false;
         this.mensajes = [{severity: 'success', summary: 'Éxito', detail: 'Se editó el libro'}];
