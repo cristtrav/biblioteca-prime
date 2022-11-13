@@ -14,7 +14,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FormularioLibroComponent } from './libros/formulario-libro/formulario-libro.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -50,7 +50,8 @@ import { PasswordModule } from 'primeng/password';
     MessagesModule,
     ConfirmDialogModule,
     DropdownModule,
-    PasswordModule
+    PasswordModule,
+    ReactiveFormsModule
   ],
   providers: [ConfirmationService],
   bootstrap: [AppComponent]
