@@ -14,11 +14,11 @@ export class LibrosComponent implements OnInit {
   @ViewChild('formulario') formLibro!: FormularioLibroComponent;
 
   //Aqui se guarda la lista de libros
-  listaLibros: Libro[] = []; 
+  listaLibros: Libro[] = [];
   //Esta variable muestra la animacion de carga
-  cargando: boolean = false; 
+  cargando: boolean = false;
   //Indica si el dialogo esta visible u oculto
-  dialogoVisible: boolean = false; 
+  dialogoVisible: boolean = false;
 
   mensajes: Message[] = [];
   tituloDialogo: string = 'Registrar libro';
@@ -42,7 +42,8 @@ export class LibrosComponent implements OnInit {
       error: (e) => {
         console.log(e);
         this.cargando = false;
-        this.mensajes = [{severity: 'error', summary: 'Error al cargar libros', detail: e.message}]
+        const mensaje: string = e.status === 403 || e.status === 401 ? 'No autorizado' : e.message;
+        this.mensajes = [{severity: 'error', summary: 'Error al cargar libros', detail: mensaje}]
       }
     });
   }
@@ -82,7 +83,8 @@ export class LibrosComponent implements OnInit {
           },
           error: (e) => {
             console.log(e);
-            this.mensajes=[{severity: 'error', summary: 'Error al eliminar', detail: e.error}];
+            const mensaje: string = e.status === 403 || e.status === 401 ? 'No autorizado' : e.message;
+            this.mensajes=[{severity: 'error', summary: 'Error al eliminar', detail: mensaje}];
           }
         });
       }
