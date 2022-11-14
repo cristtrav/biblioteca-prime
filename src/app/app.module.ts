@@ -23,6 +23,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { LoginComponent } from './login/login.component';
 import { MainAppComponent } from './main-app/main-app.component';
 import { PasswordModule } from 'primeng/password';
+import { SesionGuard } from './guards/sesion.guard';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { PasswordModule } from 'primeng/password';
     PasswordModule,
     ReactiveFormsModule
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, SesionGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
